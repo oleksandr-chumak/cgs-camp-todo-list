@@ -4,6 +4,7 @@ import 'dotenv/config';
 
 import AppRouter from './routes';
 import connectDB from './config/database';
+import errorHandlerMiddleware from './middleware/error-handler.middleware';
 
 const app = express();
 const router = new AppRouter(app);
@@ -16,6 +17,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 router.init();
+
+app.use(errorHandlerMiddleware);
 
 const port = app.get('port');
 // eslint-disable-next-line no-console
