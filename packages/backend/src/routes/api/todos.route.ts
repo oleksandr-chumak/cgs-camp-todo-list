@@ -3,6 +3,7 @@ import todoController from '../../controllers/todo.controller';
 import { createTodoSchema, updateTodoSchema } from '../../schemas/todo';
 import { IsExistMiddleware } from '../../middleware/is-exist.middleware';
 import { TodoEntity } from '../../entities';
+import { validateMiddleware } from '../../middleware/validate.middleware';
 
 const todosRouter: Router = Router();
 
@@ -14,17 +15,21 @@ todosRouter.get(
   todoController.show.bind(todoController)
 );
 
-todosRouter.post('/', ...createTodoSchema, todoController.store.bind(todoController));
+todosRouter.post(
+  '/',
+  ...validateMiddleware(createTodoSchema),
+  todoController.store.bind(todoController)
+);
 
 todosRouter.put(
   '/:id',
-  ...[IsExistMiddleware(TodoEntity, 'Todo not found'), ...updateTodoSchema],
+  ...[IsExistMiddleware(TodoEntity, 'Todo not found'), ...validateMiddleware(updateTodoSchema)],
   todoController.update.bind(todoController)
 );
 
 todosRouter.patch(
   '/:id',
-  ...[IsExistMiddleware(TodoEntity, 'Todo not found'), ...updateTodoSchema],
+  ...[IsExistMiddleware(TodoEntity, 'Todo not found'), ...validateMiddleware(updateTodoSchema)],
   todoController.update.bind(todoController)
 );
 

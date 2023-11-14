@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { Result, validationResult } from 'express-validator/check';
 import { matchedData } from 'express-validator/filter';
 import TodoService from '../services/todo.service';
-import { BadRequestException } from '../shared/exception';
 import { CreateTodoDto, UpdateTodoDto } from '../dto/todo';
 import { TodoEntity } from '../entities';
 
@@ -12,6 +10,7 @@ export class TodoController {
   async index(_: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const todos: TodoEntity[] = await this.todoService.index();
+
       res.send(todos);
     } catch (e) {
       next(e);
@@ -20,14 +19,8 @@ export class TodoController {
 
   async store(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const result: Result<CreateTodoDto> = validationResult<CreateTodoDto>(req);
-
-      if (!result.isEmpty()) {
-        result.formatWith((error) => error.msg);
-        throw new BadRequestException(JSON.stringify(result.mapped()));
-      }
-
       const data: CreateTodoDto = matchedData(req, { locations: ['body'] }) as CreateTodoDto;
+
       const createdTodo: TodoEntity = await this.todoService.store(data);
 
       res.status(201).send(createdTodo);
@@ -50,12 +43,6 @@ export class TodoController {
 
   async update(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const result: Result<UpdateTodoDto> = validationResult<UpdateTodoDto>(req);
-      if (!result.isEmpty()) {
-        result.formatWith((error) => error.msg);
-        throw new BadRequestException(JSON.stringify(result.mapped()));
-      }
-
       const updateData: UpdateTodoDto = matchedData(req, {
         locations: ['body']
       }) as UpdateTodoDto;
