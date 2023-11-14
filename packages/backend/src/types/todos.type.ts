@@ -1,5 +1,9 @@
-// TODO: Put a real interfaces here
+export enum Status {
+  'inProgress' = 'inProgress',
+  'Completed' = 'completed'
+}
 
-export interface ITodo {
-  data: string;
+export enum Access {
+  'Public' = 'public',
+  'Private' = 'private'
 }
