@@ -1,5 +1,16 @@
-// TODO: Put a real interfaces here
+import type { TodoEntity } from '../entities';
 
-export interface ITodo {
-  data: string;
+export enum Status {
+  'inProgress' = 'inProgress',
+  'Completed' = 'completed'
+}
+
+export enum Access {
+  'Public' = 'public',
+  'Private' = 'private'
+}
+
+export interface TodosAndTotalCount {
+  todos: TodoEntity[];
+  totalCount: number;
 }
