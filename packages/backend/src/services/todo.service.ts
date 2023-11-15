@@ -1,9 +1,21 @@
 import { DeepPartial, DeleteResult, UpdateResult } from 'typeorm';
 import { TodoEntity } from '../entities';
+import { GetTodosDto } from '../dto/todo/get-todos.dto';
+import { TodosAndTotalCount } from '../types/todos.type';
 
 export default class TodoService {
-  async index(): Promise<TodoEntity[]> {
-    return TodoEntity.find();
+  async index(data: GetTodosDto): Promise<TodosAndTotalCount> {
+    const { skip, limit, ...filter } = data;
+    const { userId, ...filterWithoutUserData } = filter;
+    const [todos, totalCount] = await TodoEntity.findAndCount({
+      where: {
+        ...filterWithoutUserData,
+        user: { id: userId }
+      },
+      skip,
+      take: limit
+    });
+    return { todos, totalCount };
   }
 
   async store(data: DeepPartial<TodoEntity>): Promise<TodoEntity> {

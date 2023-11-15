@@ -1,5 +1,5 @@
 import { checkSchema, ValidationChain } from 'express-validator/check';
-import { Access, Status } from '../../types/todos.type';
+import { Access, Status } from '../../../types/todos.type';
 
 export const updateTodoSchema: ValidationChain[] = checkSchema({
   title: {

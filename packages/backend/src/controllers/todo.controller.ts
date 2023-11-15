@@ -3,13 +3,19 @@ import { matchedData } from 'express-validator/filter';
 import TodoService from '../services/todo.service';
 import { CreateTodoDto, UpdateTodoDto } from '../dto/todo';
 import { TodoEntity } from '../entities';
+import { GetTodosDto } from '../dto/todo/get-todos.dto';
+import { TodosAndTotalCount } from '../types/todos.type';
 
 export class TodoController {
   constructor(private todoService: TodoService) {}
 
-  async index(_: Request, res: Response, next: NextFunction): Promise<void> {
+  async index(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const todos: TodoEntity[] = await this.todoService.index();
+      const data: GetTodosDto = matchedData(req, {
+        locations: ['query']
+      }) as GetTodosDto;
+
+      const todos: TodosAndTotalCount = await this.todoService.index(data);
 
       res.send(todos);
     } catch (e) {
