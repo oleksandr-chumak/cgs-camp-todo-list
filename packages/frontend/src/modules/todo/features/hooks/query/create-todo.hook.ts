@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import TodoService from '../../../services/todo.service';
 import { useModalContext } from '../../../../common/hooks/modal-context.hook';
 import { ICreateTodo } from '../../types/todo-service.type';
+import { QUERY_KEYS } from '../../../../common/consts/app-keys.const';
 
 export const useCreateTodo = () => {
   const todoService: TodoService = new TodoService();
@@ -10,7 +11,7 @@ export const useCreateTodo = () => {
   const { closeModal } = useModalContext();
 
   const handleSuccess = (): void => {
-    query.invalidateQueries(['todos']);
+    query.invalidateQueries([QUERY_KEYS.TODOS]);
     toast.success('Todo created');
     closeModal();
   };

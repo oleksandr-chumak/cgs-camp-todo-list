@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import TodoService from '../../../services/todo.service';
 import { GetTodos, UpdateTodo } from '../../types/todos.type';
 import { TodoModel } from '../../../models/todo.model';
+import { QUERY_KEYS } from '../../../../common/consts/app-keys.const';
 
 export const useUpdateTodo = (options?: {
   fetch: boolean;
@@ -38,7 +39,7 @@ export const useUpdateTodo = (options?: {
   });
 
   const updateTodoWithoutFetching = (updateData: UpdateTodo) => {
-    queryClient.setQueryData(['todos'], (oldData: GetTodos | undefined): GetTodos => {
+    queryClient.setQueryData([QUERY_KEYS.TODOS], (oldData: GetTodos | undefined): GetTodos => {
       if (!oldData) {
         return { totalCount: 0, todos: [] } as GetTodos;
       }
