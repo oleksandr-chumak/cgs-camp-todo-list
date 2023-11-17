@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser';
 import express from 'express';
+import cors from 'cors';
 import 'dotenv/config';
 
 import AppRouter from './routes';
@@ -14,6 +15,7 @@ connectDB();
 // Express configuration
 app.set('port', process.env.PORT || 4200);
 app.use(bodyParser.json());
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 router.init();
