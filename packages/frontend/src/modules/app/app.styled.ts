@@ -28,6 +28,8 @@ export const GlobalStyles = createGlobalStyle`
   blockquote,
   dl,
   dd {
+    text-decoration: none;
+    list-style: none;
     margin: 0;
   }
 
@@ -63,5 +65,7 @@ export const GlobalStyles = createGlobalStyle`
   textarea,
   select {
     font: inherit;
+    outline: none;
+    border: none;
   }
   `;
