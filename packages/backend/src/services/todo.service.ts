@@ -12,6 +12,9 @@ export default class TodoService {
         ...filterWithoutUserData,
         user: { id: userId }
       },
+      order: {
+        createdAt: 'DESC'
+      },
       skip,
       take: limit
     });
