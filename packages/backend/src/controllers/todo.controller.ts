@@ -5,6 +5,7 @@ import { CreateTodoDto, UpdateTodoDto } from '../dto/todo';
 import { TodoEntity } from '../entities';
 import { GetTodosDto } from '../dto/todo/get-todos.dto';
 import { TodosAndTotalCount } from '../types/todos.type';
+import { RequestWithUser } from '../types/request.type';
 
 export class TodoController {
   constructor(private todoService: TodoService) {}
@@ -25,9 +26,10 @@ export class TodoController {
 
   async store(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
+      const { user: userData } = req as RequestWithUser;
       const data: CreateTodoDto = matchedData(req, { locations: ['body'] }) as CreateTodoDto;
 
-      const createdTodo: TodoEntity = await this.todoService.store(data);
+      const { user, ...createdTodo }: TodoEntity = await this.todoService.store(userData!, data);
 
       res.status(201).send(createdTodo);
     } catch (e) {
