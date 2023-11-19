@@ -1,5 +1,5 @@
 import { DeepPartial, DeleteResult, UpdateResult } from 'typeorm';
-import { TodoEntity } from '../entities';
+import { TodoEntity, UserEntity } from '../entities';
 import { GetTodosDto } from '../dto/todo/get-todos.dto';
 import { TodosAndTotalCount } from '../types/todos.type';
 
@@ -18,8 +18,8 @@ export default class TodoService {
     return { todos, totalCount };
   }
 
-  async store(data: DeepPartial<TodoEntity>): Promise<TodoEntity> {
-    return TodoEntity.save(data);
+  async store(userEntity: UserEntity, data: Partial<TodoEntity>): Promise<TodoEntity> {
+    return TodoEntity.save<TodoEntity>({ user: userEntity, ...data });
   }
 
   async show(id: number): Promise<TodoEntity | null> {
