@@ -55,7 +55,7 @@ rules:
   # We use dynamic requires
   import/no-dynamic-require: 'off'
   global-require: 'off'
-  # We love to export default on index files
+  # We love to export default on main files
   no-restricted-exports: 'off'
   max-len: ['error', { 'code': 140 }]
   class-methods-use-this: 'off'
