@@ -5,12 +5,26 @@ export const updateTodoSchema: ValidationChain[] = checkSchema({
   title: {
     in: 'body',
     optional: true,
-    isString: { errorMessage: 'Title is not a string' }
+    isString: { errorMessage: 'Title is not a string' },
+    isLength: {
+      options: {
+        min: 3,
+        max: 50
+      },
+      errorMessage: 'title length must be between 3 and 50'
+    }
   },
   content: {
     in: 'body',
     optional: true,
-    isString: { errorMessage: 'Title is not a string' }
+    isString: { errorMessage: 'Title is not a string' },
+    isLength: {
+      options: {
+        min: 3,
+        max: 250
+      },
+      errorMessage: 'content length must be between 3 and 250'
+    }
   },
   status: {
     in: 'body',
