@@ -24,7 +24,7 @@ export const useUpdateTodo = (options?: {
 
   const handleSuccess = (data: string) => {
     if (options?.fetch) {
-      queryClient.invalidateQueries(['todos']);
+      queryClient.invalidateQueries([QUERY_KEYS.TODOS]);
     }
 
     if (options?.onSuccess) {
