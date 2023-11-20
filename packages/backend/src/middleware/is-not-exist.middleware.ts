@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
-import { NotFoundException } from '../shared/exception';
-import { IsExistOptions } from '../types/middleware.type';
+import { BadRequestException } from '../shared/exception';
+import { IsNotExistOptions } from '../types/middleware.type';
 import { findEntityByParams } from '../utils/find-entity-by-params';
-import { RequestWithEntity } from '../types/request.type';
 import { ExtendedBaseEntity } from '../entities';
 
-export function IsExistMiddleware<T extends typeof ExtendedBaseEntity>(options: IsExistOptions<T>) {
+export function isNotExistMiddleware<T extends typeof ExtendedBaseEntity>(
+  options: IsNotExistOptions<T>
+) {
   return async (req: Request, _: Response, next: NextFunction) => {
     try {
       const { message, ...optionsWithoutMessage } = options;
@@ -14,11 +15,9 @@ export function IsExistMiddleware<T extends typeof ExtendedBaseEntity>(options: 
         ...optionsWithoutMessage
       });
 
-      if (!entity) {
-        throw new NotFoundException(options.message || `${options.reqField} not found in database`);
+      if (entity) {
+        throw new BadRequestException(message || `${options.reqField} was found in database`);
       }
-
-      (req as RequestWithEntity<T>).entity = entity;
 
       next();
     } catch (e) {

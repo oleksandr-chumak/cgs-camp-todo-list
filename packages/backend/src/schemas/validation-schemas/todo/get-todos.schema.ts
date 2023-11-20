@@ -10,7 +10,6 @@ export const getTodosSchema: ValidationChain[] = checkSchema({
       errorMessage: 'Title must be a string'
     }
   },
-
   content: {
     in: 'query',
     optional: true,
