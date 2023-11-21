@@ -35,24 +35,30 @@ class TodoService extends HttpService {
   }
 
   async createTodo(data: ICreateTodo): Promise<DeserializedTodoWithIdAndTimestamps> {
-    const response = await this.post<DeserializedTodoWithIdAndTimestamps>({
-      url: BACKEND_KEYS.TODOS,
-      data
-    });
+    const response = await this.post<DeserializedTodoWithIdAndTimestamps>(
+      {
+        url: BACKEND_KEYS.TODOS,
+        data
+      },
+      true
+    );
     return response.data;
   }
 
   async updateTodo(updateData: UpdateTodo): Promise<string> {
     const { id, ...updateDataWithoutId } = updateData;
-    const response = await this.put<string>({
-      url: `${BACKEND_KEYS.TODOS}/${id}`,
-      data: updateDataWithoutId
-    });
+    const response = await this.put<string>(
+      {
+        url: `${BACKEND_KEYS.TODOS}/${id}`,
+        data: updateDataWithoutId
+      },
+      true
+    );
     return response.data;
   }
 
   async deleteTodo(id: number): Promise<string> {
-    const response = await this.delete<string>({ url: `${BACKEND_KEYS.TODOS}/${id}` });
+    const response = await this.delete<string>({ url: `${BACKEND_KEYS.TODOS}/${id}` }, true);
     return response.data;
   }
 
