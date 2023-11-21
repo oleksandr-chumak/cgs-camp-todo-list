@@ -17,9 +17,17 @@ export const ModalWindow = styled('div')`
 
   transform: translate(-50%, -50%);
 
-  @media (max-width: ${DISPLAY.MOBILE}) {
-    width: 100vw !important;
-    height: 100vh !important;
+  @media (max-width: ${DISPLAY.MOBILE}px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+
+    width: 100vw;
+    height: 100vh;
   }
 `;
 

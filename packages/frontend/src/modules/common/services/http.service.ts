@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosStatic } from 'axios';
+import { TokenService } from '../../auth/services/token.service';
 
 export class HttpService {
   constructor(
@@ -12,9 +13,8 @@ export class HttpService {
   }
 
   private populateTokenToHeaderConfig() {
-    return {
-      Authorization: localStorage.getItem('token')
-    };
+    const token: string | null = TokenService.getToken();
+    return token ? { Authorization: `Bearer ${token}` } : {};
   }
 
   private extractUrlAndDataFromConfig({

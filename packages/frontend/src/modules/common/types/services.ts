@@ -9,3 +9,9 @@ export type DeserializedModelWithIdAndTimestamps<T> = T & {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export interface HttpException {
+  error: string;
+  message: string;
+  status: number;
+}
