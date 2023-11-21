@@ -4,6 +4,7 @@ import { matchedData } from 'express-validator/filter';
 import { UserService } from '../services/user.service';
 import { RequestWithUser } from '../types/request.type';
 import { UpdateUserDto } from '../dto/user/update-user.dto';
+import { BadRequestException } from '../shared/exception';
 
 export class UserController {
   constructor(private readonly userService: UserService) {
@@ -23,14 +24,26 @@ export class UserController {
   async update(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { user } = req as RequestWithUser;
-      const updateData: UpdateUserDto = matchedData(req, { locations: ['body'] }) as UpdateUserDto;
 
-      if (updateData.password) {
-        const salt = await bcrypt.genSalt(10);
-        updateData.password = await bcrypt.hash(updateData.password, salt);
+      const updateUserData: UpdateUserDto = matchedData(req, {
+        locations: ['body']
+      }) as UpdateUserDto;
+
+      const isPasswordsEqual: boolean = await bcrypt.compare(
+        updateUserData.oldPassword,
+        user!.credentials.password
+      );
+
+      if (!isPasswordsEqual) {
+        throw new BadRequestException('Invalid old password');
       }
 
-      await this.userService.update(user!, updateData);
+      if (updateUserData.password) {
+        const salt = await bcrypt.genSalt(10);
+        updateUserData.password = await bcrypt.hash(updateUserData.password, salt);
+      }
+
+      await this.userService.update(user!, { password: updateUserData.password });
 
       res.send('User successfully updated');
     } catch (e) {

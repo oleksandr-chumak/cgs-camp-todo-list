@@ -5,9 +5,12 @@ import TodoElementIndicators from './todo-element-indicators.component';
 import TodoElementActions from './todo-element-actions.component';
 import { useModalContext } from '../../../../common/hooks/modal-context.hook';
 import TodoShowModal from '../TodoShowModal/todo-show-modal.component';
+import { useUser } from '../../../../auth/features/hooks/user.hook';
+import { UserModel } from '../../../../auth/models/user.model';
 
 const TodoElement: FC<TodoElementProps> = (props) => {
   const { id, title, content, access, status, formattedDate } = props;
+  const user: UserModel | undefined = useUser();
   const { openModal } = useModalContext();
 
   const openTodo = () => {
@@ -21,7 +24,7 @@ const TodoElement: FC<TodoElementProps> = (props) => {
       <TodoElementIndicators access={access} status={status} />
       <Styled.TodoElementPanel>
         <Styled.TodoElementDate>{formattedDate}</Styled.TodoElementDate>
-        <TodoElementActions id={id} status={status} />
+        {user ? <TodoElementActions id={id} status={status} /> : null}
       </Styled.TodoElementPanel>
     </Styled.TodoElementWrapper>
   );

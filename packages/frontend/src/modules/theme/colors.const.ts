@@ -4,15 +4,21 @@ export const COLORS = {
   primaryWhite: '#f9f9f9',
   black: '#1c1d22',
   grey: '#e9e9ea',
+  darkGrey: '#212529',
   purple: '#9c27b0',
   green: '#65C366',
   primary: '#0162cc',
   secondary: '#808080',
-  red: '#DC2626'
+  red: '#DC2626',
+  silver: '#99a1a9'
 };
 
 export const FONT_COLORS = {
   grey: '#acacae'
+};
+
+export const HOVER_COLORS = {
+  darkGrey: '#2b3036'
 };
 
 export const SHADOW_COLOR = {

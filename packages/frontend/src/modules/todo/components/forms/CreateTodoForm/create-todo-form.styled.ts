@@ -6,5 +6,5 @@ export const StyledCreateForm = styled('form')`
   align-items: center;
   justify-content: center;
   gap: 10px;
-  height: 100%;
+  height: fit-content;
 `;

@@ -159,7 +159,7 @@ export class AuthController {
 
       await this.authService.confirmAccount(payload.id);
 
-      res.redirect(`${process.env.CLIENT_SOCKET}/?confirm_token=${token}`);
+      res.redirect(`${process.env.CLIENT_SOCKET}/account-confirmation/${token}`);
     } catch (e) {
       next(e);
     }
