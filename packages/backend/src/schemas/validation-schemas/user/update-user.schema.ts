@@ -1,5 +1,6 @@
 import { checkSchema, ValidationChain } from 'express-validator/check';
 import { isStrongPassword } from '../../../shared/validators/is-strong-password';
+import { isFieldEqualField } from '../../../shared/validators/is-field-equal-field';
 
 export const updateUserSchema: ValidationChain[] = checkSchema({
   id: {
@@ -9,20 +10,20 @@ export const updateUserSchema: ValidationChain[] = checkSchema({
       errorMessage: 'Id must be positive string'
     }
   },
-
-  email: {
+  oldPassword: {
     in: 'body',
-    optional: true,
     isString: {
-      errorMessage: 'Email must be a string'
+      errorMessage: 'Old Password must be a string'
     },
-    isEmail: {
-      errorMessage: 'Email must be email'
+    custom: {
+      options: isStrongPassword,
+      errorMessage:
+        'Password must contain at least one lowercase letter, one uppercase letter, ' +
+        'one number, one special character (!@#$%^&*) and be at least 8 characters long.'
     }
   },
   password: {
     in: 'body',
-    optional: true,
     isString: {
       errorMessage: 'Password must be a string'
     },
@@ -31,6 +32,16 @@ export const updateUserSchema: ValidationChain[] = checkSchema({
       errorMessage:
         'Password must contain at least one lowercase letter, one uppercase letter, ' +
         'one number, one special character (!@#$%^&*) and be at least 8 characters long.'
+    }
+  },
+  confirmPassword: {
+    in: 'body',
+    isString: {
+      errorMessage: 'Confirm password must be a string'
+    },
+    custom: {
+      options: isFieldEqualField('password', 'confirmPassword', 'body'),
+      errorMessage: 'Confirm password must be equal password'
     }
   }
 });
