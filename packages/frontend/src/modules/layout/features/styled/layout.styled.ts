@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DISPLAY } from '../../../../theme';
+import { DISPLAY } from '../../../theme';
 
 export const LayoutWrapper = styled('div')`
   display: flex;

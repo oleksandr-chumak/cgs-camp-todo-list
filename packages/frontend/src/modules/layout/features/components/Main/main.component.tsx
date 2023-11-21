@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Children } from '../../../../../common/types/props';
+import { Children } from '../../../../common/types/props';
 import * as Styled from './main.styled';
 
 const Main: FC<Children> = ({ children }) => (
