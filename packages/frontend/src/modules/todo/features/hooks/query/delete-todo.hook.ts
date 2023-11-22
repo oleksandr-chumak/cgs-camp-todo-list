@@ -8,7 +8,7 @@ export const useDeleteTodo = (id: number) => {
   const query: QueryClient = useQueryClient();
 
   const handleSuccess = () => {
-    query.invalidateQueries({ queryKey: [QUERY_KEYS.TODOS] });
+    query.refetchQueries(QUERY_KEYS.TODOS);
     toast.success('Todo deleted');
   };
 

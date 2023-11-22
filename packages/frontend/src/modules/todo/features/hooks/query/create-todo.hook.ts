@@ -11,7 +11,7 @@ export const useCreateTodo = () => {
   const { closeModal } = useModalContext();
 
   const handleSuccess = (): void => {
-    query.invalidateQueries([QUERY_KEYS.TODOS]);
+    query.refetchQueries(QUERY_KEYS.TODOS);
     toast.success('Todo created');
     closeModal();
   };

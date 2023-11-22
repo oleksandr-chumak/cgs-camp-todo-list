@@ -2,15 +2,11 @@
 import { useMutation, useQueryClient } from 'react-query';
 import toast from 'react-hot-toast';
 import TodoService from '../../../services/todo.service';
-import { GetTodos, UpdateTodo } from '../../types/todos.type';
+import { EditTodoOptions, GetTodos, UpdateTodo } from "../../types/todos.type";
 import { TodoModel } from '../../../models/todo.model';
 import { QUERY_KEYS } from '../../../../common/consts/app-keys.const';
 
-export const useUpdateTodo = (options?: {
-  fetch: boolean;
-  onSuccess?: (data: string) => void;
-  onError?: (error: Error) => void;
-}) => {
+export const useUpdateTodo = (options?: EditTodoOptions) => {
   const queryClient = useQueryClient();
   const todoService: TodoService = new TodoService();
 
@@ -23,9 +19,7 @@ export const useUpdateTodo = (options?: {
   };
 
   const handleSuccess = (data: string) => {
-    if (options?.fetch) {
-      queryClient.invalidateQueries(['todos']);
-    }
+    queryClient.refetchQueries(QUERY_KEYS.TODOS);
 
     if (options?.onSuccess) {
       options.onSuccess(data);
@@ -38,32 +32,8 @@ export const useUpdateTodo = (options?: {
     onError: handleError
   });
 
-  const updateTodoWithoutFetching = (updateData: UpdateTodo) => {
-    queryClient.setQueryData([QUERY_KEYS.TODOS], (oldData: GetTodos | undefined): GetTodos => {
-      if (!oldData) {
-        return { totalCount: 0, todos: [] } as GetTodos;
-      }
-
-      const updatedData: GetTodos = { ...oldData };
-
-      const updatedTodos: TodoModel[] = updatedData.todos.map((todo) =>
-        (todo.id === updateData.id ? new TodoModel({ ...todo, ...updateData }) : todo)
-      );
-
-      updatedData.todos = updatedTodos;
-
-      return updatedData;
-    });
-  };
-
   const updateTodo = (updateData: UpdateTodo) => {
     mutation.mutate(updateData);
-
-    if (options?.fetch) {
-      return;
-    }
-
-    updateTodoWithoutFetching(updateData);
   };
 
   return { updateTodo };
