@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useFormik } from 'formik';
 import toast from 'react-hot-toast';
 import { useGetTodo } from '../query/get-todo.hook';
-import { ACCESS, STATUS, Todo } from '../../types/todos.type';
+import { ACCESS, STATUS, TodoWithoutUser } from '../../types/todos.type';
 import { useUpdateTodo } from '../query/update-todo.hook';
 import { useModalContext } from '../../../../common/hooks/modal-context.hook';
 import { todoSchema } from '../../schemas/todo.schema';
@@ -16,13 +16,13 @@ export const useEditTodoForm = (id: number) => {
     closeModal();
   };
 
-  const { updateTodo } = useUpdateTodo({ fetch: true, onSuccess });
+  const { updateTodo } = useUpdateTodo({ onSuccess });
 
-  const handleSubmit = (values: Todo) => {
+  const handleSubmit = (values: TodoWithoutUser) => {
     updateTodo({ ...values, id });
   };
 
-  const formik = useFormik<Todo>({
+  const formik = useFormik<TodoWithoutUser>({
     initialValues: { title: '', content: '', access: ACCESS.PUBLIC, status: STATUS.IN_PROGRESS },
     validationSchema: todoSchema,
     onSubmit: handleSubmit
@@ -39,7 +39,7 @@ export const useEditTodoForm = (id: number) => {
     }
   }, [data]);
 
-  const getFieldProperties = (name: keyof Todo) => ({
+  const getFieldProperties = (name: keyof TodoWithoutUser) => ({
     id: name,
     name,
     onChange: formik.handleChange,
@@ -61,7 +61,7 @@ export const useEditTodoForm = (id: number) => {
     }
   });
 
-  const isError = (name: keyof Todo) => formik.touched[name] && formik.errors[name];
+  const isError = (name: keyof TodoWithoutUser) => formik.touched[name] && formik.errors[name];
 
   return {
     isLoading,
