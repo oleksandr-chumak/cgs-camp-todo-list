@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC } from 'react';
 import * as Styled from './todo-element.styled';
 import { STATUS, TodoElementActionsProps } from '../../types/todos.type';
 import { Toggle } from '../../../../common/components/UI/Toggle/toggle';
@@ -19,13 +19,13 @@ const TodoElementActions: FC<TodoElementActionsProps> = ({ id, status }) => {
     });
   };
 
-  const initialChecked: boolean = useMemo(() => status === STATUS.COMPLETED, []);
+  const toggleValue: boolean = status === STATUS.COMPLETED;
 
   return (
     <Styled.TodoElementActionsWrapper>
       <Styled.DeleteIcon onClick={deleteTodo} />
       <Styled.EditIcon onClick={() => openModal(<EditTodoForm id={id} />)} />
-      <Toggle onChange={handleToggleChange} initialState={initialChecked} />
+      <Toggle onChange={handleToggleChange} value={toggleValue} />
     </Styled.TodoElementActionsWrapper>
   );
 };

@@ -2,7 +2,20 @@ import styled from 'styled-components';
 import { COLORS, DISPLAY } from '../../../../theme';
 import image from '../../../../../assets/point.svg';
 
-export const TodoMainContainerWrapper = styled('div')`
+const TodoContainer = styled('div')`
+  width: calc(100% - 20px);
+
+  height: 100%;
+  min-height: 500px;
+`;
+
+export const TodoMainContainerLoadingWrapper = styled(TodoContainer)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TodoMainContainerWrapper = styled(TodoContainer)`
   display: grid;
   position: relative;
   gap: 20px;
@@ -17,10 +30,6 @@ export const TodoMainContainerWrapper = styled('div')`
   padding: 30px 20px;
   border: 1px dashed ${COLORS.black};
   border-radius: 20px;
-  width: calc(100% - 20px);
-
-  height: 100%;
-  min-height: 500px;
 
   @media (max-width: ${DISPLAY.TABLET_XL}px) {
     grid-template-columns: repeat(2, 1fr);
