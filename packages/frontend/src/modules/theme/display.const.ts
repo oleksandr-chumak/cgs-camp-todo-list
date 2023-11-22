@@ -3,6 +3,7 @@ export const DISPLAY = {
   DESKTOP: 2560,
   TABLET_XL: 1024,
   TABLET: 768,
+  TABLET_XS: 568,
   MOBILE: 425,
   MOBILE_XS: 375
 };
