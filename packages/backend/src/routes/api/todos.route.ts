@@ -11,6 +11,7 @@ import { todoFilerSchema } from '../../schemas/transform-schemas/todo/todo-filte
 import { onlyAuthorizedMiddleware } from '../../middleware/auth/only-authorized.middleware';
 import { checkOwnershipMiddleware } from '../../middleware/auth/check-ownership.middleware';
 import { extractUserFromHeaderMiddleware } from '../../middleware/auth/extract-user-from-header.middleware';
+import { isUserOnAccessPrivateMiddleware } from '../../middleware/auth/is-user-on-access-private.middleware';
 
 const todosRouter: Router = Router();
 
@@ -31,6 +32,7 @@ todosRouter.get(
     extractUserFromHeaderMiddleware,
     ...paginationMiddleware(),
     ...validateMiddleware(getTodosSchema),
+    isUserOnAccessPrivateMiddleware,
     transformMiddleware('query', todoFilerSchema)
   ],
   todoController.index.bind(todoController)

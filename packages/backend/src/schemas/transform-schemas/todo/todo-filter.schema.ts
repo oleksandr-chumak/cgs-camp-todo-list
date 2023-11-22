@@ -5,6 +5,5 @@ export const todoFilerSchema: TransformSchema = {
   title: toRegexp,
   content: toRegexp,
   status: toEqual,
-  access: toEqual,
-  userId: toEqual
+  access: toEqual
 };
