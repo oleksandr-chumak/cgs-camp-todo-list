@@ -16,4 +16,8 @@ export interface User {
 
 export type DeserializedUserWithTimestampsAndId = DeserializedModelWithIdAndTimestamps<User>;
 
+export type DeserializedUserWithoutEmail = DeserializedModelWithIdAndTimestamps<{}>;
+
 export type UserWithTimestampsAndId = ModelWithIdAndTimestamps<User>;
+
+export type UserWithoutEmail = ModelWithIdAndTimestamps<{}>;
