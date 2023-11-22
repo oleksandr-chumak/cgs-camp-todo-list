@@ -10,6 +10,12 @@ export const QUERY_KEYS = {
   USER: 'user'
 };
 
+export const SEARCH_QUERY_KEYS = {
+  ACCESS: 'access',
+  STATUS: 'status',
+  TITLE: 'title'
+};
+
 // Backend Routes
 export const BACKEND_KEYS = {
   TODOS: 'todos',

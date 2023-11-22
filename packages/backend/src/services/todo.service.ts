@@ -15,6 +15,7 @@ export default class TodoService {
       order: {
         createdAt: 'DESC'
       },
+      relations: { user: true },
       skip,
       take: limit
     });
@@ -26,7 +27,7 @@ export default class TodoService {
   }
 
   async show(id: number): Promise<TodoEntity | null> {
-    return TodoEntity.findOne({ where: { id } });
+    return TodoEntity.findOne({ where: { id }, relations: { user: true } });
   }
 
   async update(criteria: number, data: DeepPartial<TodoEntity>): Promise<UpdateResult> {

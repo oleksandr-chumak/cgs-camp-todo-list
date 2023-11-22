@@ -19,7 +19,9 @@ export interface Todo {
   content: string;
   status: STATUS;
   access: ACCESS;
+  user: ModelWithIdAndTimestamps<{}>;
 }
+export type TodoWithoutUser = Omit<Todo, 'user'>;
 
 export type UpdateTodo = Partial<Todo> & { id: number };
 
@@ -38,6 +40,7 @@ export interface DeserializedTodo {
   content: string;
   status: STATUS;
   access: ACCESS;
+  user: DeserializedModelWithIdAndTimestamps<{}>;
 }
 
 export type DeserializedTodoWithIdAndTimestamps =
@@ -59,4 +62,13 @@ export interface TodoListProps {
 export interface TodoElementActionsProps {
   id: number;
   status: STATUS;
+}
+
+export interface TodoNavigationElementProps {
+  $active: boolean;
+}
+
+export interface EditTodoOptions {
+  onSuccess?: (data: string) => void;
+  onError?: (error: Error) => void;
 }

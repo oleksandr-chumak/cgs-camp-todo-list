@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLORS, DISPLAY } from '../../../../theme';
+import { TodoNavigationElementProps } from '../../types/todos.type';
 
 export const TodoHeaderWrapper = styled('div')`
   display: flex;
@@ -25,8 +26,10 @@ export const TodoNavigation = styled('ul')`
   }
 `;
 
-export const TodoNavigationElement = styled('li')`
-  color: ${COLORS.white};
+export const TodoNavigationElement = styled('li')<TodoNavigationElementProps>`
+  color: ${({ $active }) => ($active ? COLORS.green : COLORS.white)};
+  text-decoration: none;
+  cursor: pointer;
 `;
 
 export const TodoSearchField = styled('input')`

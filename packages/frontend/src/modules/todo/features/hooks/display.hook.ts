@@ -1,5 +1,5 @@
-import { useMediaQuery } from 'react-responsive';
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { DISPLAY } from '../../../theme';
 import { DisplayName } from '../../../common/types/media/display.type';
 
