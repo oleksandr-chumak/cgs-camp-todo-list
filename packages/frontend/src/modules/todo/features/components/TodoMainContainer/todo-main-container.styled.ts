@@ -13,6 +13,8 @@ export const TodoMainContainerLoadingWrapper = styled(TodoContainer)`
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: calc(100% - 20px);
+  width: 100vw;
 `;
 
 export const TodoMainContainerWrapper = styled(TodoContainer)`
