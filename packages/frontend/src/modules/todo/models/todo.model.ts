@@ -4,6 +4,7 @@ import {
   STATUS,
   TodoWithIdAndTimestamps
 } from '../features/types/todos.type';
+import { UserWithoutEmailModel } from '../../auth/models/user-without-email.model';
 
 export class TodoModel implements TodoWithIdAndTimestamps {
   id: number;
@@ -16,6 +17,8 @@ export class TodoModel implements TodoWithIdAndTimestamps {
 
   access: ACCESS;
 
+  user: UserWithoutEmailModel;
+
   createdAt: Date;
 
   updatedAt: Date;
@@ -26,6 +29,7 @@ export class TodoModel implements TodoWithIdAndTimestamps {
     this.content = deserializedData.content;
     this.status = deserializedData.status;
     this.access = deserializedData.access;
+    this.user = new UserWithoutEmailModel(deserializedData.user);
     this.createdAt = new Date(deserializedData.createdAt);
     this.updatedAt = new Date(deserializedData.updatedAt);
   }
