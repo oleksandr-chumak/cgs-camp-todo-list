@@ -13,7 +13,8 @@ export const QUERY_KEYS = {
 export const SEARCH_QUERY_KEYS = {
   ACCESS: 'access',
   STATUS: 'status',
-  TITLE: 'title'
+  TITLE: 'title',
+  PAGE: 'page'
 };
 
 // Backend Routes
@@ -31,3 +32,5 @@ export const ROUTER_KEYS = {
   RESET_PASSWORD_REQUEST: '/reset-password-request',
   CONFIRMATION: '/account-confirmation'
 };
+
+export const TODOS_LIMIT: number = 6;
