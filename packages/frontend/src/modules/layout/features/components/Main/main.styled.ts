@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Container } from '../../styled/layout.styled';
+import { DISPLAY } from '../../../../theme';
 
 export const MainWrapper = styled('main')`
   flex-grow: 1;
@@ -14,4 +15,8 @@ export const MainContainer = styled(Container)`
   padding: 0;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: ${DISPLAY.MOBILE}px) {
+    align-items: start;
+  }
 `;

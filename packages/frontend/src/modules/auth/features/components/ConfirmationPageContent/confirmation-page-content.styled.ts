@@ -8,6 +8,11 @@ export const ConfirmationContentWrapper = styled('div')`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: ${DISPLAY.MOBILE}px) {
+    width: 100vw;
+    height: calc(100vh - 60px);
+  }
 `;
 
 export const ConfirmationContentHeaderWrapper = styled('div')`

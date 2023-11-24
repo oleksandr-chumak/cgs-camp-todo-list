@@ -19,11 +19,10 @@ export const BaseForm = styled(ModalForm)`
   border: 1px solid ${COLORS.black};
 
   @media (max-width: ${DISPLAY.MOBILE}px) {
-    justify-content: start;
-    margin-top: 10%;
+    justify-content: center;
     border: 0;
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 60px);
   }
 `;
 
