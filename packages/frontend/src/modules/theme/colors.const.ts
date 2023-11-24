@@ -8,6 +8,7 @@ export const COLORS = {
   purple: '#9c27b0',
   green: '#65C366',
   primary: '#0162cc',
+  blue: '#e5eefa',
   secondary: '#808080',
   red: '#DC2626',
   silver: '#99a1a9'
@@ -18,7 +19,12 @@ export const FONT_COLORS = {
 };
 
 export const HOVER_COLORS = {
-  darkGrey: '#2b3036'
+  darkGrey: '#2b3036',
+  blue: '#cddff5'
+};
+
+export const BORDER_COLOR = {
+  blue: '#93baea'
 };
 
 export const SHADOW_COLOR = {
