@@ -28,9 +28,11 @@ export const TodoElementTitle = styled('h4')`
   margin-bottom: 10px;
   cursor: pointer;
   transition: all 0.3s ease 0s;
+  max-width: 390px;
+  width: 100%;
 
   overflow: hidden;
-  white-space: nowrap;
+  word-break: break-word;
   text-overflow: ellipsis;
 
   &:hover {
@@ -50,6 +52,7 @@ export const TodoElementContent = styled('p')`
   text-overflow: ellipsis;
 
   height: 55px;
+  max-width: 390px;
   width: 100%;
 
   cursor: pointer;
