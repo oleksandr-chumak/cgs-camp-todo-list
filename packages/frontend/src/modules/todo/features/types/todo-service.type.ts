@@ -9,4 +9,5 @@ export interface TodosFilterQuery {
   status?: STATUS;
   access?: ACCESS;
   title?: string;
+  page: number;
 }

@@ -57,6 +57,9 @@ export interface TodoElementIndicatorsProps {
 
 export interface TodoListProps {
   todos: TodoModel[];
+  totalCount: number;
+  currentPage: number;
+  isLoading: boolean;
 }
 
 export interface TodoElementActionsProps {
@@ -71,4 +74,9 @@ export interface TodoNavigationElementProps {
 export interface EditTodoOptions {
   onSuccess?: (data: string) => void;
   onError?: (error: Error) => void;
+}
+
+export interface TodoPaginationProps {
+  totalCount: number | undefined;
+  currentPage: number | undefined;
 }
