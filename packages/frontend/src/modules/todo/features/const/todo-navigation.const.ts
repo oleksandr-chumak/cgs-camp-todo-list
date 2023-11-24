@@ -9,16 +9,9 @@ export const TODO_NAVIGATION_EXCLUDE_SEARCH_QUERY: Record<TodoNavigationName, st
   [TodoNavigationName.COMPLETED]: [SEARCH_QUERY_KEYS.ACCESS]
 };
 
-export const TODO_NAVIGATION_QUERY_NAME: Record<TodoNavigationName, string> = {
-  [TodoNavigationName.ALL]: '',
-  [TodoNavigationName.PRIVATE]: SEARCH_QUERY_KEYS.ACCESS,
-  [TodoNavigationName.PUBLIC]: SEARCH_QUERY_KEYS.ACCESS,
-  [TodoNavigationName.COMPLETED]: SEARCH_QUERY_KEYS.STATUS
-};
-
-export const TODO_NAVIGATION_QUERY_VALUE: Record<TodoNavigationName, string> = {
-  [TodoNavigationName.ALL]: '',
-  [TodoNavigationName.PRIVATE]: ACCESS.PRIVATE,
-  [TodoNavigationName.PUBLIC]: ACCESS.PUBLIC,
-  [TodoNavigationName.COMPLETED]: STATUS.COMPLETED
+export const TODO_NAVIGATION_QUERY: Record<TodoNavigationName, Record<string, string>> = {
+  [TodoNavigationName.ALL]: { page: '1' },
+  [TodoNavigationName.PRIVATE]: { access: ACCESS.PRIVATE, page: '1' },
+  [TodoNavigationName.PUBLIC]: { access: ACCESS.PUBLIC, page: '1' },
+  [TodoNavigationName.COMPLETED]: { status: STATUS.COMPLETED, page: '1' }
 };

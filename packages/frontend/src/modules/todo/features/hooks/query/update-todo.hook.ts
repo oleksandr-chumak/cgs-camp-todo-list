@@ -2,8 +2,7 @@
 import { useMutation, useQueryClient } from 'react-query';
 import toast from 'react-hot-toast';
 import TodoService from '../../../services/todo.service';
-import { EditTodoOptions, GetTodos, UpdateTodo } from "../../types/todos.type";
-import { TodoModel } from '../../../models/todo.model';
+import { EditTodoOptions, UpdateTodo } from "../../types/todos.type";
 import { QUERY_KEYS } from '../../../../common/consts/app-keys.const';
 
 export const useUpdateTodo = (options?: EditTodoOptions) => {
