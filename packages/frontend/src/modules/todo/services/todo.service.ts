@@ -7,7 +7,7 @@ import {
 } from '../features/types/todos.type';
 import { TodoModel } from '../models/todo.model';
 import { ICreateTodo, TodosFilterQuery } from '../features/types/todo-service.type';
-import { BACKEND_KEYS } from '../../common/consts/app-keys.const';
+import { BACKEND_KEYS, TODOS_LIMIT } from '../../common/consts/app-keys.const';
 
 class TodoService extends HttpService {
   constructor() {
@@ -15,10 +15,16 @@ class TodoService extends HttpService {
     this.init();
   }
 
-  async getTodos(query: TodosFilterQuery): Promise<GetTodos> {
+  async getTodos(
+    query: TodosFilterQuery,
+    limit: number | undefined = TODOS_LIMIT
+  ): Promise<GetTodos> {
+    const { page, ...filterQuery } = query;
+    const skipCount: number = page - (limit > TODOS_LIMIT ? 2 : 1);
+    const skip: number = skipCount < 0 ? 0 : skipCount * TODOS_LIMIT;
     const response = await this.get<DeserializedGetTodos>({
       url: BACKEND_KEYS.TODOS,
-      params: { limit: 6, ...query }
+      params: { limit, skip, ...filterQuery }
     });
     const serializedTodos: TodoModel[] = response.data.todos.map((todo) => new TodoModel(todo));
     return {
